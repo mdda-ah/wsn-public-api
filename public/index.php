@@ -4,6 +4,7 @@
 Include Fat Free Framework and application classes
 */
 $f3 = require('../lib/base.php');
+$f3->config('setup.cfg');
 $f3->set('AUTOLOAD', '../classes/');
 
 /*
