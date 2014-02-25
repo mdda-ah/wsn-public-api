@@ -11,8 +11,8 @@ class Info {
 		echo 'info/unit/' . $id;
 	}
 
-	function info_sensor_types() {
-		echo 'info/sensortypes';
+	function sensor_types() {
+		echo 'info/sensor_types';
 	}
 
 }
