@@ -1,40 +1,22 @@
 <?php
 
 /*
-Include Fat Free Framework and application classes
+Include Fat Free Framework
 */
 $f3 = require('../lib/base.php');
-$f3->config('../setup.cfg');
+
+/*
+Include application classes
+*/
 $f3->set('AUTOLOAD', '../classes/');
 
 /*
-Util methods
-
-GET		/
-GET 	/ping
+Include configuration files
+Setup
+Routes and maps
 */
-$f3->route('GET @hello: /', 'Util->hello');
-$f3->route('GET @ping: /ping', 'Util->ping');
-
-/*
-Info methods
-
-GET		/units/info/all
-GET		/units/info/sensor_types
-GET		/units/info/@id
-*/
-$f3->route('GET @units_info_all: /units/info/all', 'Info->all');
-$f3->route('GET @units_info_sensor_types: /units/info/sensor_types', 'Info->sensor_types');
-$f3->map('/units/info/@id', 'Info');
-
-/*
-Data methods
-
-GET		/data/all
-GET		/data/@id
-*/
-$f3->route('GET @data_all: /units/data/all', 'Data->all');
-$f3->map('/units/data/@id',	'Data');
+$f3->config('../config/setup.cfg');
+$f3->config('../config/routesmaps.cfg');
 
 /*
 Run Fat Free Framework
