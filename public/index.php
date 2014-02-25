@@ -8,28 +8,32 @@ $f3->set('AUTOLOAD', '../classes/');
 
 /*
 Util methods
-hello
-ping
+
+GET		/
+GET 	/ping
 */
 $f3->route('GET @hello: /', 'Util->hello');
 $f3->route('GET @ping: /ping', 'Util->ping');
 
 /*
 Info methods
-unit/@id
-units
-sensor_types
+
+GET		/units/info/all
+GET		/units/info/sensor_types
+GET		/units/info/@id
 */
-$f3->route('GET @info_units: /info/@action', 'Info->@action');
-$f3->route('GET @info_unit: /info/@action/@id', 'Info->@action');
+$f3->route('GET @units_info_all: /units/info/all', 'Info->all');
+$f3->route('GET @units_info_sensor_types: /units/info/sensor_types', 'Info->sensor_types');
+$f3->map('/units/info/@id', 'Info');
 
 /*
 Data methods
-all
-unit/@id
+
+GET		/data/all
+GET		/data/@id
 */
-$f3->route('GET @data_all: /data/@action', 'Data->@action');
-$f3->route('GET @data_unit: /data/@action/@id',	'Data->@action');
+$f3->route('GET @data_all: /units/data/all', 'Data->all');
+$f3->map('/units/data/@id',	'Data');
 
 /*
 Run Fat Free Framework

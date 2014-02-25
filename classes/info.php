@@ -2,17 +2,17 @@
 
 class Info {
 
-	function units() {
-		echo 'info/units';
+	function get($f3) {
+		$id = $f3->get('PARAMS.id');
+		echo '/units/info/' . $id;
 	}
 
-	function unit($f3) {
-		$id = $f3->get('PARAMS.id');
-		echo 'info/unit/' . $id;
+	function all() {
+		echo '/units/info/all';
 	}
 
 	function sensor_types() {
-		echo 'info/sensor_types';
+		echo '/units/info/sensor_types';
 	}
 
 }

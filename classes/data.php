@@ -2,13 +2,13 @@
 
 class Data {
 
-	function all() {
-		echo 'data/all';
+	function get($f3) {
+		$id = $f3->get('PARAMS.id');
+		echo '/units/data/' . $id;
 	}
 
-	function unit($f3) {
-		$id = $f3->get('PARAMS.id');
-		echo 'data/unit/' . $id;
+	function all() {
+		echo '/units/data/all';
 	}
 
 }
