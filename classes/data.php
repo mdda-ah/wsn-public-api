@@ -3,13 +3,9 @@
 class Data {
 
 	function get($f3) {
-		$helper = new Helper();
+		global $db;
 
-		$db = new DB\SQL(
-			'mysql:host=localhost;port=3306;dbname=sensors',
-			'sensors',
-			'sensors23'
-		);
+		$helper = new Helper();
 
 		$helper->set_database_query_limit($f3);
 
@@ -30,17 +26,12 @@ class Data {
 		);
 
 		$helper->send_response($f3);
-
 	}
 
 	function all($f3) {
-		$helper = new Helper();
+		global $db;
 
-		$db = new DB\SQL(
-			'mysql:host=localhost;port=3306;dbname=sensors',
-			'sensors',
-			'sensors23'
-		);
+		$helper = new Helper();
 
 		$helper->set_database_query_limit($f3);
 
