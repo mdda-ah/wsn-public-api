@@ -3,8 +3,34 @@
 class Data {
 
 	function get($f3) {
-		$id = $f3->get('PARAMS.id');
-		echo '/units/data/' . $id;
+		$helper = new Helper();
+
+		$db = new DB\SQL(
+			'mysql:host=localhost;port=3306;dbname=sensors',
+			'sensors',
+			'sensors23'
+		);
+
+		$helper->set_database_query_limit($f3);
+
+		$f3->set(
+			'result',
+			$db->exec(
+				'SELECT * FROM readings WHERE device_id=:device_id LIMIT 0,:database_query_limit',
+				array (
+					':device_id' => $f3->get('PARAMS.id'),
+					':database_query_limit' => $f3->get('database_query_limit')
+				)
+			)
+		);
+
+		$f3->set(
+			'response_data',
+			($f3->get('result') ? $f3->get('result') : "No results")
+		);
+
+		$helper->send_response($f3);
+
 	}
 
 	function all($f3) {
