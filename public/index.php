@@ -22,9 +22,9 @@ $f3->config('../config/routesmaps.cfg');
 Create the database object and connection
 */
 $db = new DB\SQL(
-	'mysql:host=localhost;port=3306;dbname=sensors',
-	'sensors',
-	'sensors23'
+	$f3->get('dbc.host'),
+	$f3->get('dbc.user'),
+	$f3->get('dbc.pass')
 );
 
 /*
