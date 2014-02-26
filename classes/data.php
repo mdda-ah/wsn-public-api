@@ -12,7 +12,7 @@ class Data {
 		$f3->set(
 			'result',
 			$db->exec(
-				'SELECT * FROM readings WHERE device_id=:device_id LIMIT 0,:database_query_limit',
+				$f3->get('dbq.data_get'),
 				array (
 					':device_id' => $f3->get('PARAMS.id'),
 					':database_query_limit' => $f3->get('database_query_limit')
@@ -38,7 +38,7 @@ class Data {
 		$f3->set(
 			'result',
 			$db->exec(
-				'SELECT * FROM readings LIMIT 0,?',
+				$f3->get('dbq.data_all'),
 				$f3->get('database_query_limit')
 			)
 		);
