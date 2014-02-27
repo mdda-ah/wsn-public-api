@@ -7,15 +7,12 @@ class Info {
 
 		$helper = new Helper();
 
-		$helper->set_database_query_limit($f3);
-
 		$f3->set(
 			'result',
 			$db->exec(
 				$f3->get('dbq.info_get'),
 				array (
-					':device_id' => $f3->get('PARAMS.id'),
-					':database_query_limit' => $f3->get('database_query_limit')
+					':device_id' => $f3->get('PARAMS.id')
 				)
 			)
 		);
