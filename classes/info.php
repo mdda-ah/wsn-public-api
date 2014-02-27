@@ -33,11 +33,20 @@ class Info {
 	}
 
 	function sensor_types($f3) {
+		global $db;
+
 		$helper = new Helper();
 
 		$f3->set(
+			'result',
+			$db->exec(
+				$f3->get('dbq.info_sensor_types')
+			)
+		);
+
+		$f3->set(
 			'response_data',
-			$f3->get('sensor_types')
+			($f3->get('result') ? $f3->get('result') : "No results")
 		);
 
 		$helper->send_response($f3);
