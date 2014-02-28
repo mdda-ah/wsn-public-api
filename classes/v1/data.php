@@ -1,5 +1,7 @@
 <?php
 
+namespace v1;
+
 class Data {
 
 	function get($f3) {

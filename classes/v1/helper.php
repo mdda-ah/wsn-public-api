@@ -1,5 +1,7 @@
 <?php
 
+namespace v1;
+
 class Helper {
 
 	//	Get the limit parameter from the request, if present. If NAN or less than 1 then use the default limit.

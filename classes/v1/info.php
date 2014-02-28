@@ -1,5 +1,7 @@
 <?php
 
+namespace v1;
+
 class Info {
 
 	function get($f3) {
