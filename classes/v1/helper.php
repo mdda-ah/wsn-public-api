@@ -12,9 +12,31 @@ class Helper {
 				//	Check that GET.limit is a number
 				preg_match("/[0-9]/us", $f3->get('GET.limit'))
 				//	Check that GET.limit is greater than 0 and ensure does not exceed maximum query limit
-				? ($f3->get('GET.limit') > 0 ? min((int)$f3->get('GET.limit'),(int)$f3->get('db_defaults["query_limit_max"]')) : (int)$f3->get('db_defaults["query_limit"]'))
+				? (
+						$f3->get('GET.limit') > 0
+						? min((int)$f3->get('GET.limit'),(int)$f3->get('db_defaults.query_limit_max'))
+						: (int)$f3->get('db_defaults.query_limit')
+					)
 				//	Use the default query limit
-				: (int)$f3->get('db_defaults["query_limit"]')
+				: (int)$f3->get('db_defaults.query_limit')
+			)
+		);
+	}
+
+	//	Get the sensor_type_id parameter from the request, if present. If NAN or less than 1 then set to null
+	function set_sensor_type_id($f3) {
+		$f3->set('sensor_type_id',
+			(
+				//	Check that GET.sensor_type_id is a number
+				preg_match("/[0-9]/us", $f3->get('GET.sensor_type_id'))
+				? (
+						//	Check that GET.sensor_type_id is greater than 0, otherwise set to null
+						$f3->get('GET.sensor_type_id') > 0
+						? $f3->get('GET.sensor_type_id')
+						: null
+					)
+				//	Set to null
+				: null
 			)
 		);
 	}
