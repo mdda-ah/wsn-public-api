@@ -14,7 +14,7 @@ class Data {
 		$f3->set(
 			'result',
 			$db->exec(
-				$f3->get('dbq.data_get'),
+				'select coordcounter, datetime, device_id, reading, nodecounter, sensor_id from readings where device_id=:device_id and sensor_id in (select sensor_type_id from sensors where sensors.available=1 and sensors.device_id=readings.device_id) order by datetime desc limit 0,:database_query_limit',
 				array (
 					':device_id' => $f3->get('PARAMS.id'),
 					':database_query_limit' => $f3->get('database_query_limit')
@@ -40,7 +40,7 @@ class Data {
 		$f3->set(
 			'result',
 			$db->exec(
-				$f3->get('dbq.data_all'),
+				'select coordcounter, datetime, device_id, reading, nodecounter, sensor_id from readings where sensor_id in (select sensor_type_id from sensors where sensors.available=1 and sensors.device_id=readings.device_id) order by datetime desc limit 0,?',
 				$f3->get('database_query_limit')
 			)
 		);
@@ -63,7 +63,7 @@ class Data {
 		$f3->set(
 			'result',
 			$db->exec(
-				$f3->get('dbq.data_latest')
+				'select coordcounter, datetime, device_id, reading, nodecounter, sensor_id from readings where readings.id in (select * from (select max(readings.id) from readings group by readings.device_id, readings.sensor_id) as subquery)'
 			)
 		);
 

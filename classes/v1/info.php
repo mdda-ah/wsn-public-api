@@ -12,7 +12,7 @@ class Info {
 		$f3->set(
 			'result',
 			$db->exec(
-				$f3->get('dbq.info_get'),
+				'select device_id, location_name, longitude, latitude, elevation_above_ground, date_deployed, (select group_concat(sensor_type_id) from sensors where device_id=:device_id and sensors.available=1) as sensor_types_available from devices where device_id=:device_id',
 				array (
 					':device_id' => $f3->get('PARAMS.id')
 				)
@@ -37,7 +37,7 @@ class Info {
 		$f3->set(
 			'result',
 			$db->exec(
-				$f3->get('dbq.info_all'),
+				'select device_id, location_name, longitude, latitude, elevation_above_ground, date_deployed, (select group_concat(sensor_type_id) from sensors where sensors.device_id=devices.device_id and sensors.available=1) as sensor_types_available from devices order by device_id asc limit 0,?',
 				$f3->get('database_query_limit')
 			)
 		);
@@ -58,7 +58,7 @@ class Info {
 		$f3->set(
 			'result',
 			$db->exec(
-				$f3->get('dbq.info_sensor_types')
+				'select sensor_type_id, name from sensor_types order by sensor_type_id asc'
 			)
 		);
 
