@@ -63,7 +63,7 @@ class Data {
 		$f3->set(
 			'result',
 			$db->exec(
-				'select coordcounter, datetime, device_id, reading, nodecounter, sensor_id from readings where readings.id in (select * from (select max(readings.id) from readings group by readings.device_id, readings.sensor_id) as subquery)'
+				'select coordcounter, datetime, device_id, reading, nodecounter, sensor_id from readings where readings.id in (select * from (select max(readings.id) from readings group by readings.device_id, readings.sensor_id) as subquery) and sensor_id in (select sensor_type_id from sensors where sensors.available=1 and sensors.device_id=readings.device_id) order by device_id asc, datetime desc'
 			)
 		);
 
