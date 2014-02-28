@@ -51,6 +51,28 @@ class Data {
 		$helper->send_response($f3);
 	}
 
+	function latest($f3) {
+		global $db;
+
+		$helper = new Helper();
+
+		$helper->set_database_query_limit($f3);
+
+		$f3->set(
+			'result',
+			$db->exec(
+				$f3->get('dbq.data_latest')
+			)
+		);
+
+		$f3->set(
+			'response_data',
+			($f3->get('result') ? $f3->get('result') : "No results")
+		);
+
+		$helper->send_response($f3);
+	}
+
 }
 
 ?>
