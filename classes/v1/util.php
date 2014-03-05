@@ -8,8 +8,13 @@ class Util {
 		$helper = new Helper();
 
 		$f3->set(
+			'response_message',
+			'Hi. This is the MDDA Wireless Sensor Network API v1.0'
+		);
+
+		$f3->set(
 			'response_data',
-			'Hi there! This is the MDDA WSN API v1.0.'
+			null
 		);
 
 		$helper->send_response($f3);
@@ -19,8 +24,13 @@ class Util {
 		$helper = new Helper();
 
 		$f3->set(
-			'response_data',
+			'response_message',
 			'OK'
+		);
+
+		$f3->set(
+			'response_data',
+			null
 		);
 
 		$helper->send_response($f3);
