@@ -33,7 +33,18 @@ class Helper {
 
 	function send_response($f3) {
 	 	header('Content-Type: application/json');
-		echo json_encode($f3->get('response_data'), JSON_NUMERIC_CHECK);
+
+	 	$to_send = array();
+
+	 	$to_send["message"] = $f3->get('response_message');
+
+	 	if ($f3->get('response_data') != null) {
+		 	$to_send["data"] = $f3->get('response_data');
+	 	}
+
+		echo json_encode($to_send, JSON_NUMERIC_CHECK);
+
+		unset($to_send);
 	}
 
 }
