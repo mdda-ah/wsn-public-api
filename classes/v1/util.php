@@ -9,7 +9,7 @@ class Util {
 
 		$f3->set(
 			'response_data',
-			'Hi there! This is the MDDA WSN API v1.0. Glad to be of service.'
+			'Hi there! This is the MDDA WSN API v1.0.'
 		);
 
 		$helper->send_response($f3);
