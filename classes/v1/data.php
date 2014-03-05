@@ -38,10 +38,29 @@ class Data {
 		}
 
 
-		$f3->set(
-			'response_data',
-			($f3->get('result') ? $f3->get('result') : "No results")
-		);
+		if ($f3->get('result')) {
+
+			$f3->set(
+				'response_message',
+				'OK'
+			);
+			$f3->set(
+				'response_data',
+				$f3->get('result')
+			);
+
+		} else {
+
+			$f3->set(
+				'response_message',
+				"No results. Please refer to /v1/units/info/all method to get a list of device_ids to use for this method as /v1/units/data/device_id"
+			);
+			$f3->set(
+				'response_data',
+				null
+			);
+
+		}
 
 		$helper->send_response($f3);
 	}
@@ -75,11 +94,29 @@ class Data {
 			);
 		}
 
-		$f3->set(
-			'response_data',
-			($f3->get('result') ? $f3->get('result') : "No results")
-		);
+		if ($f3->get('result')) {
 
+			$f3->set(
+				'response_message',
+				'OK'
+			);
+			$f3->set(
+				'response_data',
+				$f3->get('result')
+			);
+
+		} else {
+
+			$f3->set(
+				'response_message',
+				"No results."
+			);
+			$f3->set(
+				'response_data',
+				null
+			);
+
+		}
 		$helper->send_response($f3);
 	}
 
@@ -97,11 +134,29 @@ class Data {
 			)
 		);
 
-		$f3->set(
-			'response_data',
-			($f3->get('result') ? $f3->get('result') : "No results")
-		);
+		if ($f3->get('result')) {
 
+			$f3->set(
+				'response_message',
+				'OK'
+			);
+			$f3->set(
+				'response_data',
+				$f3->get('result')
+			);
+
+		} else {
+
+			$f3->set(
+				'response_message',
+				"No results."
+			);
+			$f3->set(
+				'response_data',
+				null
+			);
+
+		}
 		$helper->send_response($f3);
 	}
 
