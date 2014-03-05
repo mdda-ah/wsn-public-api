@@ -1,0 +1,467 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<style>
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif;
+    font-size: 13px;
+    line-height: 18px;
+    color: #737373;
+    background-color: white;
+    margin: 10px 13px 10px 13px;
+}
+table {
+	margin: 10px 0 15px 0;
+	border-collapse: collapse;
+}
+td,th {	
+	border: 1px solid #ddd;
+	padding: 3px 10px;
+}
+th {
+	padding: 5px 10px;	
+}
+
+a {
+    color: #0069d6;
+}
+a:hover {
+    color: #0050a3;
+    text-decoration: none;
+}
+a img {
+    border: none;
+}
+p {
+    margin-bottom: 9px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #404040;
+    line-height: 36px;
+}
+h1 {
+    margin-bottom: 18px;
+    font-size: 30px;
+}
+h2 {
+    font-size: 24px;
+}
+h3 {
+    font-size: 18px;
+}
+h4 {
+    font-size: 16px;
+}
+h5 {
+    font-size: 14px;
+}
+h6 {
+    font-size: 13px;
+}
+hr {
+    margin: 0 0 19px;
+    border: 0;
+    border-bottom: 1px solid #ccc;
+}
+blockquote {
+    padding: 13px 13px 21px 15px;
+    margin-bottom: 18px;
+    font-family:georgia,serif;
+    font-style: italic;
+}
+blockquote:before {
+    content:"\201C";
+    font-size:40px;
+    margin-left:-10px;
+    font-family:georgia,serif;
+    color:#eee;
+}
+blockquote p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 18px;
+    margin-bottom: 0;
+    font-style: italic;
+}
+code, pre {
+    font-family: Monaco, Andale Mono, Courier New, monospace;
+}
+code {
+    background-color: #fee9cc;
+    color: rgba(0, 0, 0, 0.75);
+    padding: 1px 3px;
+    font-size: 12px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+pre {
+    display: block;
+    padding: 14px;
+    margin: 0 0 18px;
+    line-height: 16px;
+    font-size: 11px;
+    border: 1px solid #d9d9d9;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+pre code {
+    background-color: #fff;
+    color:#737373;
+    font-size: 11px;
+    padding: 0;
+}
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:10px auto;
+    }
+}
+@media print {
+	body,code,pre code,h1,h2,h3,h4,h5,h6 {
+		color: black;
+	}
+	table, pre {
+		page-break-inside: avoid;
+	}
+}
+</style>
+<title>MDDA Wireless Sensor Network API v1.0</title>
+
+</head>
+<body>
+<h1>MDDA Wireless Sensor Network API v1.0</h1>
+
+<p>Documentation v1.0. Last updated 2014-03-05.</p>
+
+<h1>Introduction</h1>
+
+<p>This is a read-only API for consuming data collected from on-street environmental sensors in Manchester, UK.</p>
+
+<p>The API accepts HTTP GET requests and returns JSON data. The methods and parameters are listed below, along with example requests and responses.</p>
+
+<p>The sensors have been deployed as part of a test project to clarify the viability of deploying Wireless Sensor Networks using low cost equipment.</p>
+
+<h2>Contact</h2>
+
+<p>If you have any questions or suggestions for improvement, please contact Alan Holding, Manchester Digital Development Agency, Manchester City Council. Email: a.holding@manchesterdda.com.</p>
+
+<h2>Caveats</h2>
+
+<p>The data provided may not be scientifically accurate given that the project is using "low-cost" equipment as part of the project trials.</p>
+
+<h1>Endpoint</h1>
+
+<pre><code>http://wsn-api.manchesterdda.net/v1/
+</code></pre>
+
+<h1>Methods</h1>
+
+<p>Methods are listed below showing HTTP request method (e.g. GET) and the URL "path" for the method (e.g. /ping).</p>
+
+<h2>GET /</h2>
+
+<p>Provides a basic "about the API" message.</p>
+
+<h3>Example request</h3>
+
+<pre><code>http://wsn-api.manchesterdda.net/v1/
+</code></pre>
+
+<h3>Example response</h3>
+
+<pre><code>{"message":"Hi. This is the MDDA Wireless Sensor Network API v1.0"}
+</code></pre>
+
+<h2>GET /ping</h2>
+
+<p>Provides a simple ""OK" if the API is working fine. This method will be expanded to include more diagnostic information in the future.</p>
+
+<h3>Example request</h3>
+
+<pre><code>http://wsn-api.manchesterdda.net/v1/ping
+</code></pre>
+
+<h3>Example response</h3>
+
+<pre><code>{"message":"OK"}
+</code></pre>
+
+<h2>GET /units/info/all</h2>
+
+<p>Provides metadata about the sensor units that have been deployed to date.</p>
+
+<h3>Fields</h3>
+
+<ul>
+<li>device_id: Reference name for the sensor unit.</li>
+<li>location_name: Readable name for where the sensor unit is located.</li>
+<li>latitude: Latitude of the geolocation of the unit. Uses WGS84 (e.g. Google Maps).</li>
+<li>longitude: Longitude of the geolocation of the unit. Uses WGS84 (e.g. Google Maps).</li>
+<li>elevation_above_ground: The elevation above ground in metres where the sensor unit is located.</li>
+<li>sensor_types_available: A comma separated list of sensor type IDs avalable on the sensor unit. Please use the /units/info/sensor_types method to get metadata about each sensor_type.</li>
+</ul>
+
+
+<h3>Example request</h3>
+
+<pre><code>http://wsn-api.manchesterdda.net/v1/units/info/all
+</code></pre>
+
+<h3>Example response</h3>
+
+<pre><code>{
+        "message": "OK",
+        "data": [
+                {
+                        "device_id": "WASP0010",
+                        "location_name": "Manchester Town Hall Moat",
+                        "longitude": -2.24481,
+                        "latitude": 53.4792,
+                        "elevation_above_ground": 0,
+                        "date_deployed": "2014-01-16",
+                        "sensor_types_available": "1,5,999"
+                },
+                …
+        ]
+}
+</code></pre>
+
+<h2>GET /units/info/[DEVICE_ID]</h2>
+
+<p>Provides metadata about a specific sensor unit.</p>
+
+<p>The [DEVICE_ID] parameter should match an existing device_id. You can use the GET /units/info/all method to get a list of device_ids. (A specific /units/info/device_ids method will be added in the next release.)</p>
+
+<h3>Fields</h3>
+
+<p>Please see the list given in the /units/info/all method.</p>
+
+<h3>Example request</h3>
+
+<pre><code>http://wsn-api.manchesterdda.net/v1/units/info/WASP0011
+</code></pre>
+
+<h3>Example response</h3>
+
+<pre><code>{
+        "message": "OK",
+        "data": [
+                {
+                        "device_id": "WASP0011",
+                        "location_name": "Manchester Town Hall Clock Tower",
+                        "longitude": -2.24454,
+                        "latitude": 53.4793,
+                        "elevation_above_ground": 77,
+                        "date_deployed": "2014-01-16",
+                        "sensor_types_available": "1,4,5,999"
+                }
+        ]
+}
+</code></pre>
+
+<h2>GET /units/info/sensor_types</h2>
+
+<p>Provides information about the sensors that have been deployed on the sensor units.</p>
+
+<h3>Fields</h3>
+
+<ul>
+<li>sensor_type_id: UID for the sensor.</li>
+<li>name: Friendly name of the sensor.</li>
+<li>data_type: What "type" of data is reported by the sensor.</li>
+<li>bounds_low: Minimum sensitivity of the sensor.</li>
+<li>bounds_low: Maximum sensitivity of the sensor.</li>
+</ul>
+
+
+<h3>Example request</h3>
+
+<pre><code>http://wsn-api.manchesterdda.net/v1/units/info/sensor_types
+</code></pre>
+
+<h3>Example response</h3>
+
+<pre><code>{
+    "message": "OK",
+    "data": [
+        {
+            "sensor_type_id": 1,
+            "name": "Temperature",
+            "data_type": "Centigrade",
+            "bounds_low": -20,
+            "bounds_high": 40
+        },
+        …
+    ]
+}
+</code></pre>
+
+<h2>GET /units/data/all</h2>
+
+<p>Provides the latest readings from all sensors units, sorted by most recent date and time. Defaults to the latest 100 readings.</p>
+
+<h3>Fields</h3>
+
+<ul>
+<li>datetime: The datetime the reading was reported by the sensor unit. Dates and times are given in UTC, so you will need to support timezones in your own app.</li>
+<li>device_id: ID of the sensor unit which reported the reading.</li>
+<li>sensor_id: ID of the sensor which data was collected from. This matched the sensor_type_ids provided by the /units/info/sensor_types method.</li>
+<li>value: The "reading" provided by the sensor. Please refer to the metadata provided by the /units/info/sensor_types method to clarify what data type this value is given in, e.g. centigrade.</li>
+<li>bounds_flag: Flag showing if the value reported is within or outside the sensors reliable range of detection. 0 = OK. -1 = Below usable detection range. 1 = Above usable detection range. Any readings which report values other than 0 should be regarded as "dodgy data".</li>
+<li>latitude: Latitude of the geolocation of the unit. Uses WGS84 (e.g. Google Maps).</li>
+<li>longitude: Longitude of the geolocation of the unit. Uses WGS84 (e.g. Google Maps).</li>
+<li>elevation_above_ground: The elevation above ground in metres where the sensor unit is located.</li>
+<li>nodecounter: Counter used in diagnostic routines on the sensor unit. Resets every 100 readings or when the sensor unit "reboots".</li>
+<li>coordcounter: Counter used in diagnostic routines on the data collection units. Can spot when a data collection unit has "rebooted" as this value resets to 1.</li>
+</ul>
+
+
+<h3>Parameters</h3>
+
+<p>Please note that a date range parameter will be added in the next release.</p>
+
+<h4>limit</h4>
+
+<p>Limit the number of readings returned. Max 1000.</p>
+
+<h4>sensor_type_id</h4>
+
+<p>Limit the readings to a specific sensor type. Please use the /units/info/sensor_types method to get a list of sensor_type_ids to use. Only one sensor type ID can be specified.</p>
+
+<h3>Example requests</h3>
+
+<pre><code>http://wsn-api.manchesterdda.net/v1/units/data/all
+http://wsn-api.manchesterdda.net/v1/units/data/all?limit=400
+http://wsn-api.manchesterdda.net/v1/units/data/all?sensor_type_id=1
+http://wsn-api.manchesterdda.net/v1/units/data/all?limit=400&amp;sensor_type_id=1
+</code></pre>
+
+<h3>Example response</h3>
+
+<pre><code>{
+        "message": "OK",
+        "data": [
+                {
+                        "datetime": "2014-02-18 20:34:37",
+                        "device_id": "WASP0013",
+                        "sensor_id": 5,
+                        "value": 2.1187277838407,
+                        "bounds_flag": 0,
+                        "latitude": 53.4703,
+                        "longitude": -2.23934,
+                        "elevation_above_ground": 6,
+                        "nodecounter": 37,
+                        "coordcounter": 210
+                },
+                …
+     ]
+}
+</code></pre>
+
+<h2>GET /units/data/[DEVICE_ID]</h2>
+
+<p>Provides the latest readings from a specific sensor unit, sorted by most recent date and time. Defaults to the latest 100 readings.</p>
+
+<p>The [DEVICE_ID] parameter should match an existing device_id. You can use the GET /units/info/all method to get a list of device_ids. (A specific /units/info/device_ids method will be added in the next release.)</p>
+
+<h3>Fields</h3>
+
+<p>Please see the fields listed in the /units/data/all method.</p>
+
+<h3>Parameters</h3>
+
+<p>This method allows the same parameters as the /units/data/all method.</p>
+
+<h3>Example requests</h3>
+
+<pre><code>http://wsn-api.manchesterdda.net/v1/units/data/wasp0010
+http://wsn-api.manchesterdda.net/v1/units/data/wasp0010?limit=400
+http://wsn-api.manchesterdda.net/v1/units/data/wasp0010?sensor_type_id=1
+http://wsn-api.manchesterdda.net/v1/units/data/wasp0010?limit=400&amp;sensor_type_id=1
+</code></pre>
+
+<h3>Example response</h3>
+
+<pre><code>{
+        "message": "OK",
+        "data": [
+                {
+                        "datetime": "2014-02-18 20:34:37",
+                        "device_id": "WASP0013",
+                        "sensor_id": 5,
+                        "value": 2.1187277838407,
+                        "bounds_flag": 0,
+                        "latitude": 53.4703,
+                        "longitude": -2.23934,
+                        "elevation_above_ground": 6,
+                        "nodecounter": 37,
+                        "coordcounter": 210
+                },
+                …
+     ]
+}
+</code></pre>
+
+<h2>GET /units/data/latest</h2>
+
+<p>Provides the latest readings from each of the deployed sensor units from the last time they reported.</p>
+
+<h3>Fields</h3>
+
+<p>Please see the fields listed in the /units/data/all method.</p>
+
+<h3>Example requests</h3>
+
+<pre><code>http://wsn-api.manchesterdda.net/v1/units/data/latest
+</code></pre>
+
+<h3>Example response</h3>
+
+<pre><code>{
+        "message": "OK",
+        "data": [
+                {
+                        "datetime": "2014-02-18 20:34:37",
+                        "device_id": "WASP0013",
+                        "sensor_id": 5,
+                        "value": 2.1187277838407,
+                        "bounds_flag": 0,
+                        "latitude": 53.4703,
+                        "longitude": -2.23934,
+                        "elevation_above_ground": 6,
+                        "nodecounter": 37,
+                        "coordcounter": 210
+                },
+                …
+     ]
+}
+</code></pre>
+</body>
+</html>
