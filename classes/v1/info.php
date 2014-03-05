@@ -96,7 +96,7 @@ class Info {
 		$f3->set(
 			'result',
 			$db->exec(
-				'select sensor_type_id, name, data_type from sensor_types order by sensor_type_id asc'
+				'select sensor_type_id, name, data_type, bounds_low, bounds_high from sensor_types order by sensor_type_id asc'
 			)
 		);
 
