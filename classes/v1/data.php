@@ -5,6 +5,8 @@ namespace v1;
 class Data extends Controller {
 
 	function get($f3,$params) {
+		$this->check_database_is_up($f3);
+
 		$this->set_database_query_limit($f3);
 
 		$this->set_sensor_type_id($f3);
@@ -56,6 +58,8 @@ class Data extends Controller {
 	}
 
 	function all($f3) {
+		$this->check_database_is_up($f3);
+
 		$this->set_database_query_limit($f3);
 
 		$this->set_sensor_type_id($f3);
@@ -103,6 +107,8 @@ class Data extends Controller {
 	}
 
 	function latest($f3) {
+		$this->check_database_is_up($f3);
+
 		$this->set_database_query_limit($f3);
 
 		$f3->set(

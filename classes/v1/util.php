@@ -17,6 +17,8 @@ class Util extends Controller {
 	}
 
 	function ping($f3) {
+		$this->check_database_is_up($f3);
+
 		$f3->set(
 			'wsn.message',
 			'OK'

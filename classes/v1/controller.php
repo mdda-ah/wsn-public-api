@@ -8,18 +8,33 @@ class Controller {
 		$db;
 
 	function __construct() {
-
 		$f3 = \Base::instance();
 
-		// Create the database object and connection
-		$db = new \DB\SQL(
-			$f3->get('db.host'),
-			$f3->get('db.user'),
-			$f3->get('db.pass')
-		);
+		try {
+			// Try to create the database object and connection
+			$db = new \DB\SQL(
+				$f3->get('db.host'),
+				$f3->get('db.user'),
+				$f3->get('db.pass'),
+				array(\PDO::ATTR_ERRMODE => \PDO::ERRMODE_WARNING)
+			);
+			$this->db = $db;
+		} catch (\PDOException $e) {
+			$this->db = null;
+		}
 
-		$this->db = $db;
+	}
 
+	function check_database_is_up($f3) {
+		if (!$this->db) {
+			$f3->set(
+				'wsn.message',
+				'Oops. The database server appears to be down. Please email a.holding@manchesterdda.com and tell him off.'
+			);
+			$f3->status(500);
+			$this->afterroute($f3);
+			die;
+		}
 	}
 
 	function beforeroute($f3) {

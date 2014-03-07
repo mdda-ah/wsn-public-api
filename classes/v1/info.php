@@ -5,6 +5,7 @@ namespace v1;
 class Info extends Controller {
 
 	function get($f3,$params) {
+		$this->check_database_is_up($f3);
 
 		$f3->set(
 			'result',
@@ -42,6 +43,7 @@ class Info extends Controller {
 	}
 
 	function all($f3) {
+		$this->check_database_is_up($f3);
 
 		$this->set_database_query_limit($f3);
 
@@ -80,6 +82,7 @@ class Info extends Controller {
 	}
 
 	function sensor_types($f3) {
+		$this->check_database_is_up($f3);
 
 		$f3->set(
 			'result',
