@@ -2,7 +2,40 @@
 
 namespace v1;
 
-class Helper {
+class Controller {
+
+	protected
+		$db;
+
+	function __construct() {
+
+		$f3 = \Base::instance();
+
+		// Create the database object and connection
+		$db = new \DB\SQL(
+			$f3->get('db.host'),
+			$f3->get('db.user'),
+			$f3->get('db.pass')
+		);
+
+		$this->db = $db;
+
+	}
+
+	function beforeroute($f3) {
+	}
+
+	function afterroute($f3) {
+	 	$tmp = array();
+
+	 	$tmp["message"] = $f3->get('wsn.message');
+	 	if ($f3->get('wsn.data') != null) {$tmp["data"] = $f3->get('wsn.data');}
+
+	 	header('Content-Type: application/json');
+		echo json_encode($tmp, JSON_NUMERIC_CHECK);
+
+		unset($tmp);
+	}
 
 	//	Get the limit parameter from the request, if present. If NAN or less than 1 then use the default limit.
 	function set_database_query_limit($f3) {
@@ -29,22 +62,6 @@ class Helper {
 			'sensor_type_id',
 			(preg_match("/[0-9]/us", $f3->get('GET.sensor_type_id')) ? $f3->get('GET.sensor_type_id') : null)
 		);
-	}
-
-	function send_response($f3) {
-	 	header('Content-Type: application/json');
-
-	 	$to_send = array();
-
-	 	$to_send["message"] = $f3->get('response_message');
-
-	 	if ($f3->get('response_data') != null) {
-		 	$to_send["data"] = $f3->get('response_data');
-	 	}
-
-		echo json_encode($to_send, JSON_NUMERIC_CHECK);
-
-		unset($to_send);
 	}
 
 }

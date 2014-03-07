@@ -2,19 +2,16 @@
 
 namespace v1;
 
-class Info {
+class Info extends Controller {
 
-	function get($f3) {
-		global $db;
-
-		$helper = new Helper();
+	function get($f3,$params) {
 
 		$f3->set(
 			'result',
-			$db->exec(
+			$this->db->exec(
 				'select device_id, location_name, longitude, latitude, elevation_above_ground, date_deployed, (select group_concat(sensor_type_id) from sensors where device_id=:device_id and sensors.available=1) as sensor_types_available from devices where device_id=:device_id',
 				array (
-					':device_id' => $f3->get('PARAMS.id')
+					':device_id' => $params["id"]
 				)
 			)
 		);
@@ -22,40 +19,35 @@ class Info {
 		if ($f3->get('result')) {
 
 			$f3->set(
-				'response_message',
+				'wsn.message',
 				'OK'
 			);
 			$f3->set(
-				'response_data',
+				'wsn.data',
 				$f3->get('result')
 			);
 
 		} else {
 
 			$f3->set(
-				'response_message',
+				'wsn.message',
 				"No results. Please refer to /v1/units/info/all method to get a list of device_ids to use for this method as /v1/units/info/device_id"
 			);
 			$f3->set(
-				'response_data',
+				'wsn.message',
 				null
 			);
 
 		}
-
-		$helper->send_response($f3);
 	}
 
 	function all($f3) {
-		global $db;
 
-		$helper = new Helper();
-
-		$helper->set_database_query_limit($f3);
+		$this->set_database_query_limit($f3);
 
 		$f3->set(
 			'result',
-			$db->exec(
+			$this->db->exec(
 				'select device_id, location_name, longitude, latitude, elevation_above_ground, date_deployed, (select group_concat(sensor_type_id) from sensors where sensors.device_id=devices.device_id and sensors.available=1) as sensor_types_available from devices order by device_id asc limit 0,?',
 				$f3->get('database_query_limit')
 			)
@@ -64,67 +56,58 @@ class Info {
 		if ($f3->get('result')) {
 
 			$f3->set(
-				'response_message',
+				'wsn.message',
 				'OK'
 			);
 			$f3->set(
-				'response_data',
+				'wsn.data',
 				$f3->get('result')
 			);
 
 		} else {
 
 			$f3->set(
-				'response_message',
+				'wsn.message',
 				'No results.'
 			);
 			$f3->set(
-				'response_data',
+				'wsn.data',
 				null
 			);
 
 		}
 
-		$helper->send_response($f3);
 	}
 
 	function sensor_types($f3) {
-		global $db;
-
-		$helper = new Helper();
 
 		$f3->set(
 			'result',
-			$db->exec(
+			$this->db->exec(
 				'select sensor_type_id, name, data_type, bounds_low, bounds_high from sensor_types order by sensor_type_id asc'
 			)
 		);
 
 		if ($f3->get('result')) {
-
 			$f3->set(
-				'response_message',
+				'wsn.message',
 				'OK'
 			);
 			$f3->set(
-				'response_data',
+				'wsn.data',
 				$f3->get('result')
 			);
-
 		} else {
-
 			$f3->set(
-				'response_message',
+				'wsn.message',
 				'No results.'
 			);
 			$f3->set(
-				'response_data',
+				'wsn.data',
 				null
 			);
-
 		}
 
-		$helper->send_response($f3);
 	}
 
 }
