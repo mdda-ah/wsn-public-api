@@ -18,27 +18,15 @@ class Info extends Controller {
 		);
 
 		if ($f3->get('result')) {
-
-			$f3->set(
-				'wsn.message',
-				'OK'
-			);
-			$f3->set(
-				'wsn.data',
-				$f3->get('result')
-			);
-
+			$f3->mset(array(
+	    	'wsn.message'	=>	$f3->get('message_ok'),
+				'wsn.data'		=>	$f3->get('result')
+	    ));
 		} else {
-
-			$f3->set(
-				'wsn.message',
-				"No results. Please refer to /v1/units/info/all method to get a list of device_ids to use for this method as /v1/units/info/device_id"
-			);
-			$f3->set(
-				'wsn.message',
-				null
-			);
-
+			$f3->mset(array(
+	    	'wsn.message'	=>	$f3->get('message_no_results'),
+				'wsn.data'		=>	null
+			));
 		}
 	}
 
@@ -56,27 +44,15 @@ class Info extends Controller {
 		);
 
 		if ($f3->get('result')) {
-
-			$f3->set(
-				'wsn.message',
-				'OK'
-			);
-			$f3->set(
-				'wsn.data',
-				$f3->get('result')
-			);
-
+			$f3->mset(array(
+	    	'wsn.message'	=>	$f3->get('message_ok'),
+				'wsn.data'		=>	$f3->get('result')
+	    ));
 		} else {
-
-			$f3->set(
-				'wsn.message',
-				'No results.'
-			);
-			$f3->set(
-				'wsn.data',
-				null
-			);
-
+			$f3->mset(array(
+	    	'wsn.message'	=>	$f3->get('message_no_results'),
+				'wsn.data'		=>	null
+			));
 		}
 
 	}
@@ -92,23 +68,15 @@ class Info extends Controller {
 		);
 
 		if ($f3->get('result')) {
-			$f3->set(
-				'wsn.message',
-				'OK'
-			);
-			$f3->set(
-				'wsn.data',
-				$f3->get('result')
-			);
+			$f3->mset(array(
+	    	'wsn.message'	=>	$f3->get('message_ok'),
+				'wsn.data'		=>	$f3->get('result')
+	    ));
 		} else {
-			$f3->set(
-				'wsn.message',
-				'No results.'
-			);
-			$f3->set(
-				'wsn.data',
-				null
-			);
+			$f3->mset(array(
+	    	'wsn.message'	=>	$f3->get('message_no_results'),
+				'wsn.data'		=>	null
+			));
 		}
 
 	}

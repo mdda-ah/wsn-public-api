@@ -29,7 +29,7 @@ class Controller {
 		if (!$this->db) {
 			$f3->set(
 				'wsn.message',
-				'Oops. The database server appears to be down. Please email a.holding@manchesterdda.com and tell him off.'
+				$f3->get('msg_database_is_down')
 			);
 			$f3->status(500);
 			$this->afterroute($f3);
