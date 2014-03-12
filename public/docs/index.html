@@ -158,7 +158,11 @@ sup {
 <body>
 <h1>MDDA Wireless Sensor Network API v1.0</h1>
 
-<p>Documentation v1.0. Last updated 2014-03-05.</p>
+<h1>Documentation v1.1</h1>
+
+<p>Last updated 2014-03-12.</p>
+
+<p>(<a href="/docs/changes.html">The API Changelog is on another page…</a>)</p>
 
 <h1>Introduction</h1>
 
@@ -381,6 +385,7 @@ http://wsn-api.manchesterdda.net/v1/units/data/all?limit=400&amp;sensor_type_id=
                         "coordcounter": 210
                 },
                 …
+            ]
      ]
 }
 </code></pre>
@@ -425,6 +430,7 @@ http://wsn-api.manchesterdda.net/v1/units/data/wasp0010?limit=400&amp;sensor_typ
                         "coordcounter": 210
                 },
                 …
+            ]
      ]
 }
 </code></pre>
@@ -460,7 +466,41 @@ http://wsn-api.manchesterdda.net/v1/units/data/wasp0010?limit=400&amp;sensor_typ
                         "coordcounter": 210
                 },
                 …
+            ]
      ]
+}
+</code></pre>
+
+<h2>GET /units/status/battery</h2>
+
+<p>Provides the battery charge percentage level from each of the deployed sensor units from the last time they reported in.</p>
+
+<h3>Fields</h3>
+
+<ul>
+<li>device_id: ID of the sensor unit which reported the reading.</li>
+<li>datetime: The datetime the reading was reported by the sensor unit. Dates and times are given in UTC, so you will need to support timezones in your own app.</li>
+<li>battery_charge: The battery charge level of the unit as a percentage.</li>
+</ul>
+
+
+<h3>Example requests</h3>
+
+<pre><code>http://wsn-api.manchesterdda.net/v1/units/status/battery
+</code></pre>
+
+<h3>Example response</h3>
+
+<pre><code>{
+    "message": "OK",
+    "data": [
+        {
+            "device_id": "WASP0010",
+            "datetime": "2014-03-12 11:25:41",
+            "battery_charge": 54
+        },
+        …
+    ]
 }
 </code></pre>
 </body>
