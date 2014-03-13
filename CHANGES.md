@@ -3,6 +3,10 @@
 ## Changelog
 ([The API documentation is on another page…](/docs/))
 
+### 2014-03-13
+1. Updates GET /units/status/battery method to include location name of device.
+2. Moves documentation to v1.1.1.
+
 ### 2014-03-12
 1. Adds GET /units/status/battery method.
 2. Checks if database server is up and returns response message if it isn't.

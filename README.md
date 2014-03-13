@@ -1,6 +1,6 @@
 # MDDA Wireless Sensor Network API v1.0
 
-# Documentation v1.1
+# Documentation v1.1.1
 
 Last updated 2014-03-12.
 
@@ -256,6 +256,7 @@ Provides the battery charge percentage level from each of the deployed sensor un
 
 ### Fields
 * device_id: ID of the sensor unit which reported the reading.
+* location_name: Readable name for where the sensor unit is located.
 * datetime: The datetime the reading was reported by the sensor unit. Dates and times are given in UTC, so you will need to support timezones in your own app.
 * battery_charge: The battery charge level of the unit as a percentage.
 
@@ -268,6 +269,7 @@ Provides the battery charge percentage level from each of the deployed sensor un
 	    "data": [
 	        {
 	            "device_id": "WASP0010",
+	            "location_name":"Manchester Town Hall Moat",
 	            "datetime": "2014-03-12 11:25:41",
 	            "battery_charge": 54
 	        },
