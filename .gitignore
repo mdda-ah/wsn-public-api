@@ -18,3 +18,4 @@ Icon
 log/
 public/hacktest.php
 config/db.cfg
+config/debug.cfg
