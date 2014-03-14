@@ -15,10 +15,6 @@ class Status extends Controller {
 		);
 
 		if ($f3->get('result')) {
-
-		}
-
-		if ($f3->get('result')) {
 			$f3->mset(array(
 	    	'wsn.message'	=>	$f3->get('message_ok'),
 				'wsn.data'		=>	$f3->get('result')
