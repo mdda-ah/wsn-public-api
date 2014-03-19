@@ -22,6 +22,26 @@ try {
 }
 
 /*
+Custom error handler
+*/
+$f3->set('ONERROR',
+  function($f3) {
+		$tmp = array();
+		$tmp["message"] = sprintf(
+			"%s. %s. Please see the API documentation at http://wsn-api.manchesterdda.net/docs/",
+			$f3->get('ERROR.status'),
+			$f3->get('ERROR.text')
+		);
+		$f3->status($f3->get('ERROR.code'));
+
+		header('Content-Type: application/json');
+		echo json_encode($tmp, JSON_NUMERIC_CHECK);
+
+		unset($tmp);
+  }
+);
+
+/*
 Run Fat Free Framework
 */
 $f3->run();
