@@ -1,5 +1,8 @@
 <?php
 
+//	Set timezone for this app to UTC
+date_default_timezone_set('UTC');
+
 /*
 Include Fat Free Framework
 */
